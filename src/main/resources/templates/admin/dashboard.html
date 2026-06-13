@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/modern.css">
+</head>
+<body>
+    <main class="admin-shell">
+        <section class="admin-hero">
+            <h1>Taxi Booking Admin Dashboard</h1>
+            <p>Manage bookings, ride sharing requests, contacts, services, and credentials from one connected backend panel.</p>
+            <p th:if="${message}" class="flash-message" th:text="${message}"></p>
+        </section>
+
+        <section class="admin-stats">
+            <div class="stat-tile">
+                <span>Total Bookings</span>
+                <strong th:text="${stats.totalBookings}">0</strong>
+            </div>
+            <div class="stat-tile">
+                <span>Today's Bookings</span>
+                <strong th:text="${stats.todayBookings}">0</strong>
+            </div>
+            <div class="stat-tile">
+                <span>Upcoming Trips</span>
+                <strong th:text="${stats.upcomingBookings}">0</strong>
+            </div>
+            <div class="stat-tile">
+                <span>Ride Share Requests</span>
+                <strong th:text="${stats.totalRideShares}">0</strong>
+            </div>
+            <div class="stat-tile">
+                <span>Shared Seats</span>
+                <strong th:text="${stats.totalSharedSeats}">0</strong>
+            </div>
+            <div class="stat-tile">
+                <span>Services</span>
+                <strong th:text="${stats.totalServices}">0</strong>
+            </div>
+        </section>
+
+        <section class="insight-panel">
+            <h2>Backend Intelligence</h2>
+            <p>
+                The dashboard is calculating live metrics from MySQL using Spring Data JPA.
+                There are <strong th:text="${stats.upcomingRideShares}">0</strong> upcoming ride-share requests and
+                <strong th:text="${stats.totalContacts}">0</strong> customer contact messages available for admin review.
+            </p>
+        </section>
+
+        <section class="admin-grid">
+            <a class="admin-card" href="readAllBookings">
+                <strong>Bookings</strong>
+                <span>View and manage taxi booking requests.</span>
+            </a>
+            <a class="admin-card" href="readAllRideShares">
+                <strong>Ride Sharing</strong>
+                <span>Review shared ride requests and seat requirements.</span>
+            </a>
+            <a class="admin-card" href="readAllContacts">
+                <strong>Contacts</strong>
+                <span>Read customer messages and phone details.</span>
+            </a>
+            <a class="admin-card" href="addService">
+                <strong>Services</strong>
+                <span>Add new services with images and descriptions.</span>
+            </a>
+            <a class="admin-card" href="changeCredentials">
+                <strong>Credentials</strong>
+                <span>Update admin username and password securely.</span>
+            </a>
+            <a class="admin-card logout" href="/dologout">
+                <strong>Logout</strong>
+                <span>Close the current admin session.</span>
+            </a>
+        </section>
+    </main>
+</body>
+</html>

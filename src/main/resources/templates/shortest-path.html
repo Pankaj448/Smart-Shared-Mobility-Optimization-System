@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Shortest Path Finder</title>
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/superfish.js"></script>
+    <script src="js/jquery.mobilemenu.js"></script>
+  </head>
+  <body id="top">
+    <div class="project-shell">
+      <div class="main">
+        <div th:insert="~{fragments/header :: header}"></div>
+        <section class="hero-panel">
+          <div class="container_12">
+            <div class="grid_8">
+              <h2>Shortest Path Finder</h2>
+              <p>Choose source and destination. The backend calculates the shortest taxi route using Dijkstra algorithm on a weighted city road graph.</p>
+              <div class="hero-actions">
+                <a class="primary-action" href="#pathFinder">Find Route</a>
+                <a class="secondary-action" href="ride-sharing">Ride Sharing</a>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section id="pathFinder" class="modern-form-section">
+      <div class="container_12">
+        <div class="grid_5">
+          <form class="modern-form" th:action="@{/shortest-path}" method="post">
+            <h3>Calculate Best Route</h3>
+            <p th:if="${errorMessage}" class="form-error" th:text="${errorMessage}"></p>
+            <div class="modern-grid">
+              <div class="full">
+                <label>Source</label>
+                <select name="source" required>
+                  <option value="">Select source</option>
+                  <option th:each="location : ${locations}"
+                          th:value="${location}"
+                          th:text="${location}"
+                          th:selected="${location == selectedSource}"></option>
+                </select>
+              </div>
+              <div class="full">
+                <label>Destination</label>
+                <select name="destination" required>
+                  <option value="">Select destination</option>
+                  <option th:each="location : ${locations}"
+                          th:value="${location}"
+                          th:text="${location}"
+                          th:selected="${location == selectedDestination}"></option>
+                </select>
+              </div>
+            </div>
+            <button class="modern-btn" type="submit">Show Shortest Path</button>
+          </form>
+        </div>
+
+        <div class="grid_6 prefix_1">
+          <div class="route-result" th:if="${pathResult}">
+            <h3>Best Route Found</h3>
+            <div class="route-summary">
+              <div>
+                <span>Distance</span>
+                <strong th:text="${pathResult.totalDistanceKm + ' km'}">0 km</strong>
+              </div>
+              <div>
+                <span>Estimated Time</span>
+                <strong th:text="${pathResult.estimatedTimeMinutes + ' min'}">0 min</strong>
+              </div>
+            </div>
+
+            <div class="path-line">
+              <div class="path-step" th:each="stop, status : ${pathResult.path}">
+                <span th:text="${status.index + 1}">1</span>
+                <strong th:text="${stop}">Location</strong>
+              </div>
+            </div>
+
+            <div class="route-map">
+              <div class="route-map-track"></div>
+              <div class="route-map-stop" th:each="stop, status : ${pathResult.path}">
+                <span th:text="${status.index + 1}">1</span>
+                <strong th:text="${stop}">Location</strong>
+              </div>
+            </div>
+
+            <p class="algorithm-note">Algorithm used: Dijkstra shortest path with weighted distances between city points.</p>
+          </div>
+
+          <div class="route-result" th:unless="${pathResult}">
+            <h3>Backend Algorithm Feature</h3>
+            <p>Select two locations to calculate the shortest route, distance and estimated travel time from the Java service layer.</p>
+            <div class="path-line">
+              <div class="path-step"><span>1</span><strong>Select source</strong></div>
+              <div class="path-step"><span>2</span><strong>Select destination</strong></div>
+              <div class="path-step"><span>3</span><strong>Get shortest route</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </section>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

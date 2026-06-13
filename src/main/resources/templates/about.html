@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>About TaxiBook</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/superfish.js"></script>
+    <script src="js/jquery.mobilemenu.js"></script>
+  </head>
+  <body id="top">
+    <div class="project-shell">
+      <div class="main">
+        <div th:insert="~{fragments/header :: header}"></div>
+        <section class="hero-panel">
+          <div class="container_12">
+            <div class="grid_8">
+              <h2>About TaxiBook System</h2>
+              <p>TaxiBook is a complete Spring Boot major project for online taxi booking, ride sharing, driver assignment, shortest route calculation, admin analytics, and service management.</p>
+              <div class="hero-actions">
+                <a class="primary-action" href="home">Book Now</a>
+                <a class="secondary-action" href="shortest-path">Find Shortest Path</a>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="feature-strip">
+      <div class="container_12">
+        <div class="grid_4">
+          <div class="feature-card">
+            <h4>Backend Connected</h4>
+            <p>All booking, contact, ride sharing, service and admin data is stored through Spring Data JPA and MySQL.</p>
+          </div>
+        </div>
+        <div class="grid_4">
+          <div class="feature-card">
+            <h4>Smart Driver Assignment</h4>
+            <p>When a customer books a taxi or ride share, the backend assigns a driver and vehicle automatically.</p>
+          </div>
+        </div>
+        <div class="grid_4">
+          <div class="feature-card">
+            <h4>Shortest Path Engine</h4>
+            <p>The shortest route module uses Dijkstra algorithm to show distance, time, route steps and map view.</p>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </section>
+
+    <section class="home-showcase">
+      <div class="container_12">
+        <div class="grid_6">
+          <img class="showcase-image" src="images/page2_img1.jpg" alt="Taxi service">
+        </div>
+        <div class="grid_5 prefix_1 showcase-copy">
+          <h3>Designed for a strong project demo</h3>
+          <p>This project shows real MVC flow: Thymeleaf frontend, Spring controllers, service layer business logic, JPA repositories, MySQL database, Spring Security admin login and live dashboard analytics.</p>
+          <div class="stats-row">
+            <div class="stat-box"><strong>MVC</strong><span>Clean layers</span></div>
+            <div class="stat-box"><strong>JPA</strong><span>Database</span></div>
+            <div class="stat-box"><strong>AI-like</strong><span>Route logic</span></div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </section>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

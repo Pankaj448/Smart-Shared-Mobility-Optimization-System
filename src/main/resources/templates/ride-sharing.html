@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ride Sharing</title>
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/superfish.js"></script>
+    <script src="js/jquery.mobilemenu.js"></script>
+  </head>
+  <body id="top">
+    <div class="project-shell">
+      <div class="main">
+        <div th:insert="~{fragments/header :: header}"></div>
+        <section class="hero-panel">
+          <div class="container_12">
+            <div class="grid_8">
+              <h2>Share your ride. Save more together.</h2>
+              <p>Passengers travelling on the same route can request shared rides with pickup, drop, date, time, and seat count. Admin can review every request from the dashboard.</p>
+              <div class="hero-actions">
+                <a class="primary-action" href="#shareForm">Request Ride Share</a>
+                <a class="secondary-action" href="services">View Services</a>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="feature-strip">
+      <div class="container_12">
+        <div class="grid_4">
+          <div class="feature-card">
+            <h4>Matched Routes</h4>
+            <p>Collect pickup, drop, date and time so admin can group similar passengers quickly.</p>
+          </div>
+        </div>
+        <div class="grid_4">
+          <div class="feature-card">
+            <h4>Seat Planning</h4>
+            <p>Know exactly how many seats a customer needs before confirming the shared taxi.</p>
+          </div>
+        </div>
+        <div class="grid_4">
+          <div class="feature-card">
+            <h4>Admin Control</h4>
+            <p>Every ride sharing request is saved in MySQL and visible in the admin panel.</p>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </section>
+
+    <section id="shareForm" class="modern-form-section">
+      <div class="container_12">
+        <div class="grid_7">
+          <form class="modern-form" th:action="@{/rideshareform}" th:object="${rideShareRequest}" method="post">
+            <h3>Ride Sharing Request</h3>
+            <div th:if="${message}" class="flash-message" th:text="${message}"></div>
+
+            <div class="modern-grid">
+              <div>
+                <label>Name</label>
+                <input th:field="*{name}" type="text" placeholder="Full name">
+                <span class="form-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+              </div>
+              <div>
+                <label>Email</label>
+                <input th:field="*{email}" type="email" placeholder="you@example.com">
+                <span class="form-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+              </div>
+              <div>
+                <label>Phone</label>
+                <input th:field="*{phone}" type="text" placeholder="10 digit mobile">
+                <span class="form-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+              </div>
+              <div>
+                <label>Seats Needed</label>
+                <select th:field="*{seats}">
+                  <option value="1">1 seat</option>
+                  <option value="2">2 seats</option>
+                  <option value="3">3 seats</option>
+                  <option value="4">4 seats</option>
+                  <option value="5">5 seats</option>
+                  <option value="6">6 seats</option>
+                </select>
+                <span class="form-error" th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}"></span>
+              </div>
+              <div>
+                <label>Pickup Location</label>
+                <input th:field="*{source}" type="text" placeholder="From">
+                <span class="form-error" th:if="${#fields.hasErrors('source')}" th:errors="*{source}"></span>
+              </div>
+              <div>
+                <label>Drop Location</label>
+                <input th:field="*{destination}" type="text" placeholder="To">
+                <span class="form-error" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></span>
+              </div>
+              <div>
+                <label>Date</label>
+                <input th:field="*{date}" type="date">
+                <span class="form-error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+              </div>
+              <div>
+                <label>Time</label>
+                <input th:field="*{time}" type="time">
+                <span class="form-error" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span>
+              </div>
+              <div class="full">
+                <label>Notes</label>
+                <textarea th:field="*{notes}" placeholder="Preferred pickup point, luggage, or other request"></textarea>
+                <span class="form-error" th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
+              </div>
+            </div>
+            <button class="modern-btn" type="submit">Send Ride Share Request</button>
+          </form>
+        </div>
+        <div class="grid_4 prefix_1">
+          <div class="feature-card">
+            <h4>How it works</h4>
+            <p>Submit your route and seats. The admin team checks matching requests and confirms the shared ride with customers.</p>
+          </div>
+          <div class="feature-card" style="margin-top:16px;">
+            <h4>Best for</h4>
+            <p>Students, office routes, railway station pickups, airport drops, and regular city travel.</p>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </section>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

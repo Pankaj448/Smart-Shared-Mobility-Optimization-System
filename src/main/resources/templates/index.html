@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="booking/css/booking.css">
+    <link rel="stylesheet" href="css/camera.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modern.css">
+
+    <!-- JS Libraries -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/superfish.js"></script>
+    <script src="js/jquery.ui.totop.js"></script>
+    <script src="js/jquery.equalheights.js"></script>
+    <script src="js/jquery.mobilemenu.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/camera.js"></script>
+
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <script src="js/jquery.mobile.customized.min.js"></script>
+    <!--<![endif]-->
+    <script src="booking/js/booking.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        jQuery('#camera_wrap').camera({
+          loader: false,
+          pagination: false,
+          minHeight: '444',
+          thumbnails: false,
+          height: '28.28125%',
+          caption: true,
+          navigation: true,
+          fx: 'mosaic'
+        });
+        $().UItoTop({ easingType: 'easeOutQuart' });
+      });
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <link rel="stylesheet" media="screen" href="css/ie.css">
+    <![endif]-->
+  </head>
+
+  <body class="page1" id="top">
+    <div class="main">
+
+      <!--==============================HEADER=================================-->
+      <div th:insert="~{fragments/header :: header}"></div>
+      <!--==============================HEADER=================================-->
+
+      <!--==============================SLIDER=================================-->
+      <div class="project-shell">
+        <section class="hero-panel">
+          <div class="container_12">
+            <div class="grid_8">
+              <h2>Premium Taxi Booking & Ride Sharing</h2>
+              <p>Book city rides, manage travel requests, and share taxis on common routes. This system connects customer forms directly with the admin dashboard and MySQL backend.</p>
+              <div class="hero-actions">
+                <a class="primary-action" href="#bookingForm">Book Taxi</a>
+                <a class="secondary-action" href="ride-sharing">Ride Sharing</a>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="home-showcase">
+        <div class="container_12">
+          <div class="grid_6">
+            <img class="showcase-image" src="images/page1_img2.jpg" alt="Taxi booking">
+          </div>
+          <div class="grid_5 prefix_1 showcase-copy">
+            <h3>Built for a complete major project demo</h3>
+            <p>Customer booking, contact messages, service management, admin login, credential update, image upload, and ride sharing requests are connected through Spring Boot, Thymeleaf, JPA, Security, and MySQL.</p>
+            <div class="stats-row">
+              <div class="stat-box"><strong>24/7</strong><span>Taxi support</span></div>
+              <div class="stat-box"><strong>4+</strong><span>Admin modules</span></div>
+              <div class="stat-box"><strong>100%</strong><span>Backend connected</span></div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </section>
+
+      <!--==============================BANNERS=================================-->
+      <div class="container_12">
+        <div class="grid_4">
+          <div class="banner">
+            <div class="maxheight">
+              <div class="banner_title">
+                <img src="images/icon1.png" alt="">
+                <div class="extra_wrapper">Fast &amp;
+                  <div class="color1">Safe</div>
+                </div>
+              </div>
+              Verified drivers, assigned vehicles, and backend-powered booking confirmation for every ride.
+              <a href="shortest-path" class="fa fa-share-square"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid_4">
+          <div class="banner">
+            <div class="maxheight">
+              <div class="banner_title">
+                <img src="images/icon2.png" alt="">
+                <div class="extra_wrapper">Best
+                  <div class="color1">Prices</div>
+                </div>
+              </div>
+              Choose economy, standard, or luxury rides with transparent service categories.
+              <a href="services" class="fa fa-share-square"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid_4">
+          <div class="banner">
+            <div class="maxheight">
+              <div class="banner_title">
+                <img src="images/icon3.png" alt="">
+                <div class="extra_wrapper">Package
+                  <div class="color1">Delivery</div>
+                </div>
+              </div>
+              Share rides on common routes and reduce travel cost with smart seat planning.
+              <a href="ride-sharing" class="fa fa-share-square"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
+      <!--==============================PHONE BAR=================================-->
+      <div class="c_phone">
+        <div class="container_12">
+          <div class="grid_12">
+            <div class="fa fa-phone"></div> +1800 559 6580
+            <span>ORDER NOW!</span>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+
+      <!--==============================CONTENT=================================-->
+      <div class="content">
+        <div class="container_12">
+          <!--==============================BOOKING FORM=================================-->
+          <div class="grid_5">
+			<div th:if="${message}" 
+			     th:text="${message}" 
+			     style="margin: 10px 0; color: green; font-weight: bold;"></div>
+
+            <h3>Booking Form</h3>
+
+            <form id="bookingForm"
+                  th:action="@{/bookingform}"
+                  th:object="${bookingForm}"
+                  method="post">
+
+              <div class="fl1">
+                <div class="tmInput">
+                  <input th:field="*{name}" th:value="${bookingForm.name}" placeholder="Name:" type="text">
+                  <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+
+                <div class="tmInput">
+                  <input th:field="*{source}" th:value="${bookingForm.source}" placeholder="From:" type="text">
+                  <span style="color:red" th:if="${#fields.hasErrors('source')}" th:errors="*{source}"></span>
+                </div>
+              </div>
+
+              <div class="fl1">
+                <div class="tmInput">
+                  <input th:field="*{email}" th:value="${bookingForm.email}" placeholder="Email:" type="email">
+                  <span style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+
+                <div class="tmInput mr0">
+                  <input th:field="*{destination}" th:value="${bookingForm.destination}" placeholder="To:" type="text">
+                  <span style="color:red" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></span>
+                </div>
+              </div>
+
+              <div class="clear"></div>
+
+              <strong>Time</strong>
+              <div class="tmInput">
+                <input th:field="*{time}" name="time" th:value="${bookingForm.time}" type="time">
+                <span style="color:red" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span>
+              </div>
+
+              <div class="clear"></div>
+
+              <strong>Date</strong>
+              <div class="tmInput">
+                <input th:field="*{date}"  name="date" th:value="${bookingForm.date}" type="date">
+                <span style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+              </div>
+
+              <div class="clear"></div>
+
+              <div class="tmRadio">
+                <p>Comfort</p>
+                <label><input th:field="*{comfort}" th:checked="${bookingForm.comfort=='Cheap'}" type="radio" value="Cheap"/> Cheap</label>
+                <label><input th:field="*{comfort}" th:checked="${bookingForm.comfort=='Standard'}" type="radio" value="Standard"/> Standard</label>
+                <label><input th:field="*{comfort}" th:checked="${bookingForm.comfort=='Lux'}" type="radio" value="Lux"/> Lux</label>
+                <span style="color:red" th:if="${#fields.hasErrors('comfort')}" th:errors="*{comfort}"></span>
+              </div>
+
+              <div class="clear"></div>
+
+              <div class="fl1 fl2">
+                <em>Adult</em>
+                <select th:field="*{adult}" class="tmSelect auto">
+                  <option th:selected="${bookingForm.adult==1}" value="1">1</option>
+                  <option value="2" th:selected="${bookingForm.adult==2}">2</option>
+                  <option value="3" th:selected="${bookingForm.adult==3}">3</option>
+				  <option value="4" th:selected="${bookingForm.adult==4}">4</option>
+                </select>
+                <span style="color:red" th:if="${#fields.hasErrors('adult')}" th:errors="*{adult}"></span>
+              </div>
+
+              <div class="fl1 fl2">
+                <em>Children</em>
+                <select th:field="*{children}" class="tmSelect auto">
+                  <option value="0" th:selected="${bookingForm.children==0}">0</option>
+                  <option value="1" th:selected="${bookingForm.children==1}">1</option>
+                  <option value="2" th:selected="${bookingForm.children==2}">2</option>
+				  <option value="3" th:selected="${bookingForm.children==3}">3</option>
+                </select>
+                <span style="color:red" th:if="${#fields.hasErrors('children')}" th:errors="*{children}"></span>
+              </div>
+
+              <div class="clear"></div>
+
+              <div class="tmTextarea">
+                <textarea th:field="*{message}" name="message" th:text="${bookingForm.message}" placeholder="Message"></textarea>
+                <span style="color:red" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
+              </div>
+
+              <button class="btn" type="submit">Submit</button>
+            </form>
+          </div>
+
+          <!--==============================IMAGES=================================-->
+          <div class="grid_6 prefix_1">
+            <a href="index2.html" class="type">
+              <img src="images/page1_img1.jpg" alt="">
+              <span class="type_caption">Economy</span>
+            </a>
+
+            <a href="index2.html" class="type">
+              <img src="images/page1_img2.jpg" alt="">
+              <span class="type_caption">Standard</span>
+            </a>
+
+            <a href="index2.html" class="type">
+              <img src="images/page1_img3.jpg" alt="">
+              <span class="type_caption">Lux</span>
+            </a>
+          </div>
+
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--==============================FOOTER=================================-->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
+    <!--==============================JS FOR BOOKING FORM=================================-->
+    <script>
+      $(function() {
+        $('#bookingForm').bookingForm({
+          ownerEmail: '#'
+        });
+      });
+      $(function() {
+        $('#bookingForm input, #bookingForm textarea').placeholder();
+      });
+    </script>
+  </body>
+</html>

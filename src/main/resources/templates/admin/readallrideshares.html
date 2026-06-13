@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ride Share Requests</title>
+  <link rel="stylesheet" href="/css/modern.css">
+</head>
+<body>
+  <div class="table-shell">
+    <div class="table-card">
+      <h1>Ride Share Requests</h1>
+      <p th:if="${message}" class="flash-message" th:text="${message}"></p>
+      <a href="dashboard">Back to Admin Dashboard</a>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Seats</th>
+            <th>Driver</th>
+            <th>Driver Phone</th>
+            <th>Vehicle</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="rideShare : ${allRideShares}">
+            <td th:text="${rideShare.id}"></td>
+            <td th:text="${rideShare.name}"></td>
+            <td th:text="${rideShare.email}"></td>
+            <td th:text="${rideShare.phone}"></td>
+            <td th:text="${rideShare.source}"></td>
+            <td th:text="${rideShare.destination}"></td>
+            <td th:text="${rideShare.date}"></td>
+            <td th:text="${rideShare.time}"></td>
+            <td th:text="${rideShare.seats}"></td>
+            <td th:text="${rideShare.assignedDriverName}"></td>
+            <td th:text="${rideShare.assignedDriverPhone}"></td>
+            <td th:text="${rideShare.assignedVehicleNumber + ' (' + rideShare.assignedVehicleType + ')'}"></td>
+            <td th:text="${rideShare.notes}"></td>
+            <td><a th:href="@{/admin/deleteRideShare/{id}(id=${rideShare.id})}">DELETE</a></td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(allRideShares)}">
+            <td colspan="14">No ride sharing requests found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

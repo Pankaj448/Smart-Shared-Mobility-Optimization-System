@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Service</title>
+    <link rel="stylesheet" href="/css/modern.css">
+</head>
+<body>
+    <main class="modern-form-section">
+        <div class="container_12">
+            <div class="grid_6 prefix_3">
+                <form class="modern-form" action="addService" method="post" enctype="multipart/form-data">
+                    <h3>Add Taxi Service</h3>
+                    <p th:if="${msg}" class="flash-message" th:text="${msg}"></p>
+
+                    <div class="modern-grid">
+                        <div class="full">
+                            <label for="serviceImage">Service Image</label>
+                            <input type="file" id="serviceImage" name="image" accept="image/*" required>
+                        </div>
+                        <div class="full">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" placeholder="Airport Pickup" required>
+                        </div>
+                        <div class="full">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" placeholder="Describe the service for customers" required></textarea>
+                        </div>
+                    </div>
+
+                    <button class="modern-btn" type="submit">Save Service</button>
+                    <a class="secondary-action" href="dashboard" style="color:#10223d;border-color:#cbd5e1;margin-left:10px;">Dashboard</a>
+                </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </main>
+</body>
+</html>

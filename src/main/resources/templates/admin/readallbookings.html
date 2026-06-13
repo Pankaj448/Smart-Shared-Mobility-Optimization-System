@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Details</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 40px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #0078D7;
+      color: #fff;
+      text-transform: capitalize;
+    }
+
+    td {
+      background-color: #fafafa;
+      color: #333;
+    }
+
+    tr:hover td {
+      background-color: #f2f2f2;
+    }
+
+    .back-btn {
+      display: block;
+      width: 180px;
+      margin: 30px auto;
+      background-color: #0078D7;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Booking Details</h2>
+  <h2 th:text="${message}"></h2>
+
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Comfort</th>
+      <th>Adults</th>
+      <th>Children</th>
+      <th>Driver</th>
+      <th>Driver Phone</th>
+      <th>Vehicle</th>
+      <th>Message</th>
+	  <th>Action</th>
+    </tr>
+
+    <tr th:each="booking : ${allBookings}">
+      <td th:text="${booking.id}">1</td>
+      <td th:text="${booking.name}"></td>
+      <td th:text="${booking.email}"></td>
+      <td th:text="${booking.source}"></td>
+      <td th:text="${booking.destination}"></td>
+      <td th:text="${booking.date}"></td>
+      <td th:text="${booking.time}"></td>
+      <td th:text="${booking.comfort}"></td>
+      <td th:text="${booking.adult}"></td>
+      <td th:text="${booking.children}"></td>
+      <td th:text="${booking.assignedDriverName}"></td>
+      <td th:text="${booking.assignedDriverPhone}"></td>
+      <td th:text="${booking.assignedVehicleNumber + ' (' + booking.assignedVehicleType + ')'}"></td>
+      <td th:text="${booking.message}"></td>
+	  <td> 	  <a th:href="@{/admin/deleteBooking/{id}(id=${booking.id})}">DELETE</a>
+
+	</td>
+    </tr>
+  </table>
+
+  <a href="dashboard" class="back-btn">Back to Form</a>
+
+</body>
+</html>
