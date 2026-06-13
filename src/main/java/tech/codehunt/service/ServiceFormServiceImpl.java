@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.util.StringUtils;
@@ -16,9 +17,12 @@ import tech.codehunt.model.ServiceForm;
 @Service
 public class ServiceFormServiceImpl implements ServiceFormService {
 	private final ServiceFormCurd serviceFormCurd;
+	private final String uploadDir;
 
-	public ServiceFormServiceImpl(ServiceFormCurd serviceFormCurd) {
+	public ServiceFormServiceImpl(ServiceFormCurd serviceFormCurd,
+								  @Value("${app.upload-dir:uploads/myserviceimg}") String uploadDir) {
 		this.serviceFormCurd = serviceFormCurd;
+		this.uploadDir = uploadDir;
 	}
 
 
@@ -33,7 +37,7 @@ public class ServiceFormServiceImpl implements ServiceFormService {
 		serviceForm.setImage(filename);
 		ServiceForm savedService = serviceFormCurd.save(serviceForm);
 
-		Path uploadDirectory = Paths.get("src", "main", "resources", "static", "myserviceimg").toAbsolutePath().normalize();
+		Path uploadDirectory = Paths.get(uploadDir).toAbsolutePath().normalize();
 		Files.createDirectories(uploadDirectory);
 		Files.copy(multipartFile.getInputStream(), uploadDirectory.resolve(filename), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
